@@ -1,0 +1,21 @@
+# Netlify configuration for the L'Aventure du Sucre landing page.
+# Static site — nothing to build; the repository root is published as-is.
+
+[build]
+  publish = "."
+  # No build step: the site is plain HTML/CSS/JS.
+  command = ""
+
+# Single-page site: serve index.html for any path that isn't a real file.
+# Netlify checks for an existing file first, so real assets (/assets/*) are
+# served directly; only unknown paths fall through to the landing page.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Long-cache the fingerprint-free image assets (safe to bump if you swap them).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
