@@ -253,6 +253,79 @@
   @media (max-width:760px){
     .nav-links{display:none;}
   }
+
+  /* ── Booking modal ──────────────────────────────────── */
+  .modal-backdrop{
+    position:fixed;inset:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;padding:24px;
+    background:rgba(20,10,4,0.55);backdrop-filter:blur(6px);
+    opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;
+  }
+  .modal-backdrop.open{opacity:1;visibility:visible;}
+  .modal{
+    position:relative;width:100%;max-width:480px;max-height:calc(100vh - 48px);overflow-y:auto;
+    background:var(--cream);border-radius:24px;padding:34px 32px 32px;
+    box-shadow:0 30px 80px rgba(20,10,4,0.5);
+    transform:translateY(16px) scale(.98);transition:transform .22s ease;
+  }
+  .modal-backdrop.open .modal{transform:none;}
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
+    border:none;cursor:pointer;background:rgba(43,26,16,0.08);color:#4A3320;
+    font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+  }
+  .modal-close:hover{background:rgba(43,26,16,0.16);}
+  .modal-title{font-weight:700;font-size:26px;line-height:1.1;margin:0;letter-spacing:-0.01em;color:var(--ink);}
+  .modal-sub{font-size:14.5px;line-height:1.5;color:#6B543C;margin:10px 0 22px;}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .field > span{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:#4A3320;}
+  .field input{
+    font-family:var(--body);font-size:15px;color:var(--ink);
+    padding:11px 14px;border:1px solid #D8C29B;border-radius:12px;background:var(--cream-card);
+    transition:border-color .15s ease,box-shadow .15s ease;
+  }
+  .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,89,28,0.14);}
+  .field input:invalid:not(:placeholder-shown){border-color:#B4432B;}
+  .qty-list{display:flex;flex-direction:column;gap:10px;margin:20px 0 6px;}
+  .qty-row{
+    display:flex;align-items:center;gap:12px;
+    background:var(--cream-card);border:1px solid #EBD9BB;border-radius:14px;padding:12px 14px;
+  }
+  .qty-info{flex:1;display:flex;flex-direction:column;gap:1px;}
+  .qty-name{font-weight:600;font-size:15px;color:var(--ink);}
+  .qty-price{font-size:13px;color:#8A6A4C;}
+  .stepper{display:flex;align-items:center;gap:10px;}
+  .step{
+    width:30px;height:30px;border-radius:50%;border:1px solid #D8C29B;background:var(--cream);
+    color:var(--accent);font-size:18px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:border-color .15s ease,color .15s ease;
+  }
+  .step:hover:not(:disabled){border-color:var(--accent);}
+  .step:disabled{opacity:.4;cursor:not-allowed;}
+  .step-val{min-width:20px;text-align:center;font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);}
+  .total-row{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin:18px 0 20px;padding-top:16px;border-top:1px solid #E5D2AF;
+  }
+  .total-row span{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4A3320;}
+  .total-row strong{font-family:var(--display);font-weight:700;font-size:28px;color:var(--accent);letter-spacing:-0.01em;}
+  .modal-submit{width:100%;padding:15px;font-size:16px;}
+  .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
+  .success{text-align:center;padding:8px 0;}
+  .success-check{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
+    background:var(--green);color:#FFF9EF;font-size:32px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .success h2{font-weight:700;font-size:24px;margin:0 0 12px;color:var(--ink);}
+  .success p{font-size:15.5px;line-height:1.6;color:#5C4630;margin:0 0 24px;}
+  body.modal-open{overflow:hidden;}
+
+  @media (prefers-reduced-motion:reduce){
+    .modal-backdrop,.modal{transition:none;}
+    *{animation:none !important;}
+  }
 </style>
 </head>
 <body>
@@ -431,6 +504,83 @@
     <div class="footer-rights" data-i18n="footerRights"></div>
   </footer>
 
+  <div class="modal-backdrop" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-modal-title" aria-hidden="true">
+    <div class="modal">
+      <button class="modal-close" type="button" data-action="close-modal" aria-label="Close">&times;</button>
+
+      <div id="modal-form-view">
+        <h2 class="modal-title" id="book-modal-title" data-i18n="bookModalTitle"></h2>
+        <p class="modal-sub" data-i18n="bookModalSubtitle"></p>
+
+        <form id="book-form" novalidate>
+          <label class="field">
+            <span data-i18n="formName"></span>
+            <input type="text" name="name" required autocomplete="name" placeholder=" ">
+          </label>
+          <label class="field">
+            <span data-i18n="formEmail"></span>
+            <input type="email" name="email" required autocomplete="email" placeholder=" ">
+          </label>
+          <label class="field">
+            <span data-i18n="formDate"></span>
+            <input type="date" name="date" required placeholder=" ">
+          </label>
+
+          <div class="qty-list">
+            <div class="qty-row">
+              <div class="qty-info">
+                <span class="qty-name" data-i18n="formAdults"></span>
+                <span class="qty-price">Rs 425</span>
+              </div>
+              <div class="stepper" data-field="adults" data-min="1">
+                <button class="step" type="button" data-dir="-1" aria-label="Decrease adults">&minus;</button>
+                <output class="step-val">2</output>
+                <button class="step" type="button" data-dir="1" aria-label="Increase adults">+</button>
+              </div>
+            </div>
+            <div class="qty-row">
+              <div class="qty-info">
+                <span class="qty-name" data-i18n="formChildren"></span>
+                <span class="qty-price">Rs 215</span>
+              </div>
+              <div class="stepper" data-field="children" data-min="0">
+                <button class="step" type="button" data-dir="-1" aria-label="Decrease children">&minus;</button>
+                <output class="step-val">0</output>
+                <button class="step" type="button" data-dir="1" aria-label="Increase children">+</button>
+              </div>
+            </div>
+            <div class="qty-row">
+              <div class="qty-info">
+                <span class="qty-name" data-i18n="formUnder6"></span>
+                <span class="qty-price" data-i18n="formUnder6Note"></span>
+              </div>
+              <div class="stepper" data-field="under6" data-min="0">
+                <button class="step" type="button" data-dir="-1" aria-label="Decrease under 6">&minus;</button>
+                <output class="step-val">0</output>
+                <button class="step" type="button" data-dir="1" aria-label="Increase under 6">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="total-row">
+            <span data-i18n="formTotal"></span>
+            <strong id="total-amount">Rs 0</strong>
+          </div>
+
+          <button type="submit" class="btn btn-primary modal-submit" data-i18n="formSubmit"></button>
+          <p class="modal-fineprint" data-i18n="formFineprint"></p>
+        </form>
+      </div>
+
+      <div id="modal-success-view" class="success" hidden>
+        <div class="success-check" aria-hidden="true">&#10003;</div>
+        <h2 data-i18n="formSuccessTitle"></h2>
+        <p id="success-text"></p>
+        <button type="button" class="btn btn-primary" data-action="reset-modal" data-i18n="formAgain"></button>
+      </div>
+    </div>
+  </div>
+
 <script>
   const STRINGS = {
     en: {
@@ -481,6 +631,17 @@
       footerTagline: "The story of sugar, rum and Mauritius — under one roof.",
       footerAddress: "Beau Plan, Pamplemousses, Mauritius",
       footerRights: "© 2026 L'Aventure du Sucre. All rights reserved.",
+      bookModalTitle: "Book your visit",
+      bookModalSubtitle: "Reserve your tickets to L'Aventure du Sucre — we'll send your confirmation by email.",
+      formName: "Full name", formEmail: "Email", formDate: "Visit date",
+      formAdults: "Adults", formChildren: "Children (6–12)", formUnder6: "Under 6", formUnder6Note: "Free",
+      formTotal: "Total", formSubmit: "Confirm booking",
+      formFineprint: "Demo form — no payment is taken and no ticket is issued.",
+      formSuccessTitle: "Booking received!",
+      formSuccessText: "Thank you, {name}. A confirmation for {count} on {date} is on its way to {email}.",
+      formTicketOne: "1 ticket", formTicketMany: "{n} tickets",
+      formAgain: "Book another visit",
+      formNeedTickets: "Please add at least one ticket.",
     },
     fr: {
       brandTag: "Musée du Sucre · Île Maurice",
@@ -530,6 +691,17 @@
       footerTagline: "L'histoire du sucre, du rhum et de Maurice — sous un même toit.",
       footerAddress: "Beau Plan, Pamplemousses, Île Maurice",
       footerRights: "© 2026 L'Aventure du Sucre. Tous droits réservés.",
+      bookModalTitle: "Réservez votre visite",
+      bookModalSubtitle: "Réservez vos billets pour L'Aventure du Sucre — nous vous enverrons votre confirmation par e-mail.",
+      formName: "Nom complet", formEmail: "E-mail", formDate: "Date de visite",
+      formAdults: "Adultes", formChildren: "Enfants (6–12 ans)", formUnder6: "Moins de 6 ans", formUnder6Note: "Gratuit",
+      formTotal: "Total", formSubmit: "Confirmer la réservation",
+      formFineprint: "Formulaire de démonstration — aucun paiement n'est prélevé et aucun billet n'est émis.",
+      formSuccessTitle: "Réservation reçue !",
+      formSuccessText: "Merci, {name}. Une confirmation pour {count} le {date} est en route vers {email}.",
+      formTicketOne: "1 billet", formTicketMany: "{n} billets",
+      formAgain: "Réserver une autre visite",
+      formNeedTickets: "Veuillez ajouter au moins un billet.",
     },
   };
 
@@ -591,29 +763,134 @@
     document.getElementById("footer-hours").textContent = t.hoursValue + " · " + t.hoursTime;
   }
 
-  function scrollToVisit() {
-    const el = document.getElementById("visit");
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 76;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  }
-
   function toggleLang() {
     lang = lang === "en" ? "fr" : "en";
     localStorage.setItem(STORAGE_KEY, lang);
     render();
   }
 
+  /* ── Booking modal ─────────────────────────────────── */
+  const PRICES = { adults: 425, children: 215, under6: 0 };
+  const MAX_PER_TYPE = 20;
+  const counts = { adults: 2, children: 0, under6: 0 };
+
+  const modal = document.getElementById("book-modal");
+  const formView = document.getElementById("modal-form-view");
+  const successView = document.getElementById("modal-success-view");
+  const bookForm = document.getElementById("book-form");
+  let lastFocused = null;
+
+  function groupNum(n, sep) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+  }
+  function fmtMoney(n) {
+    return "Rs " + groupNum(n, lang === "fr" ? " " : ",");
+  }
+
+  function updateTotal() {
+    const total = counts.adults * PRICES.adults + counts.children * PRICES.children;
+    document.getElementById("total-amount").textContent = fmtMoney(total);
+    modal.querySelectorAll(".stepper").forEach((st) => {
+      const field = st.getAttribute("data-field");
+      const min = parseInt(st.getAttribute("data-min"), 10) || 0;
+      st.querySelector(".step-val").textContent = counts[field];
+      const dec = st.querySelector('[data-dir="-1"]');
+      const inc = st.querySelector('[data-dir="1"]');
+      if (dec) dec.disabled = counts[field] <= min;
+      if (inc) inc.disabled = counts[field] >= MAX_PER_TYPE;
+    });
+  }
+
+  function openModal() {
+    lastFocused = document.activeElement;
+    successView.hidden = true;
+    formView.hidden = false;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    bookForm.elements.date.min = new Date().toISOString().slice(0, 10);
+    updateTotal();
+    setTimeout(() => bookForm.elements.name.focus(), 60);
+  }
+
+  function closeModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  function resetModal() {
+    bookForm.reset();
+    counts.adults = 2; counts.children = 0; counts.under6 = 0;
+    successView.hidden = true;
+    formView.hidden = false;
+    updateTotal();
+    bookForm.elements.name.focus();
+  }
+
+  // Steppers + backdrop click (backdrop element === modal itself).
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) { closeModal(); return; }
+    const step = e.target.closest(".step");
+    if (!step) return;
+    const st = step.closest(".stepper");
+    const field = st.getAttribute("data-field");
+    const min = parseInt(st.getAttribute("data-min"), 10) || 0;
+    const dir = parseInt(step.getAttribute("data-dir"), 10);
+    counts[field] = Math.max(min, Math.min(MAX_PER_TYPE, counts[field] + dir));
+    updateTotal();
+  });
+
+  bookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const t = STRINGS[lang];
+    const totalTickets = counts.adults + counts.children + counts.under6;
+    if (totalTickets < 1) { alert(t.formNeedTickets); return; }
+    if (!bookForm.checkValidity()) { bookForm.reportValidity(); return; }
+
+    const data = new FormData(bookForm);
+    const name = (data.get("name") || "").toString().trim();
+    const email = (data.get("email") || "").toString().trim();
+    const dateVal = (data.get("date") || "").toString();
+    let dateFmt = dateVal;
+    try {
+      dateFmt = new Date(dateVal + "T00:00:00").toLocaleDateString(
+        lang === "fr" ? "fr-FR" : "en-GB",
+        { day: "numeric", month: "long", year: "numeric" }
+      );
+    } catch (err) { /* fall back to raw value */ }
+    const countLabel = totalTickets === 1
+      ? t.formTicketOne
+      : t.formTicketMany.replace("{n}", totalTickets);
+
+    document.getElementById("success-text").textContent = t.formSuccessText
+      .replace("{name}", name)
+      .replace("{count}", countLabel)
+      .replace("{date}", dateFmt)
+      .replace("{email}", email);
+
+    formView.hidden = true;
+    successView.hidden = false;
+    successView.querySelector("button").focus();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+  });
+
   document.addEventListener("click", (e) => {
     const target = e.target.closest("[data-action]");
     if (!target) return;
     const action = target.getAttribute("data-action");
     if (action === "toggle-lang") toggleLang();
-    if (action === "book") { e.preventDefault(); scrollToVisit(); }
+    if (action === "book") { e.preventDefault(); openModal(); }
+    if (action === "close-modal") closeModal();
+    if (action === "reset-modal") resetModal();
   });
 
   render();
+  updateTotal();
 </script>
 </body>
 </html>
