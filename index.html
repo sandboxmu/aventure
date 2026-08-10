@@ -198,6 +198,8 @@
   }
   .feature-img img{width:100%;height:100%;object-fit:cover;}
   .cards{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px;}
+  .cards-head{margin-top:44px;}
+  .cards-head + .cards{margin-top:18px;}
   .card{
     background:var(--cream-card);border:1px solid #EBD9BB;border-radius:20px;padding:30px 26px;
     display:flex;flex-direction:column;gap:12px;transition:transform .2s ease,box-shadow .2s ease;
@@ -453,6 +455,7 @@
       <div class="feature-img">
         <img src="/assets/expFeature.webp" alt="Inside the museum: historic sugar-factory machinery">
       </div>
+      <div class="cards-head"><span class="eyebrow" data-i18n="cardsEyebrow"></span></div>
       <div class="cards" id="cards-grid"></div>
     </div>
   </section>
@@ -668,6 +671,7 @@
       expTitle: "What's waiting inside",
       expText: "More than 5,000 m² to explore inside a former 19th-century sugar factory. Interactive displays, archive images, animated models, sound installations and large-format film bring the place back to life, telling how sugar cane shaped the landscapes, the communities and the history of Mauritius.",
       expText2: "History, botany, agriculture, energy, biodiversity and gastronomy unfold across themed spaces where you become, by turns, participant and spectator in a playful, sensory adventure that delights young and old alike.",
+      cardsEyebrow: "The four pillars of your visit",
       cards: [
         { n: "01", title: "Journey through history", body: "Walk the halls of a working factory frozen in time and follow 250 years of sugar, trade and the people behind it." },
         { n: "02", title: "Hands-on & playful", body: "Giant machines, interactive exhibits and games designed to keep children exploring from the first room to the last." },
@@ -733,6 +737,7 @@
       expTitle: "Ce qui vous attend à l'intérieur",
       expText: "Plus de 5 000 m² à explorer au cœur d'une ancienne sucrerie du XIXᵉ siècle. Dispositifs interactifs, images d'archives, maquettes animées, installations sonores et vidéos grand format redonnent vie aux lieux et racontent comment la canne à sucre a façonné les paysages, les communautés et l'histoire de Maurice.",
       expText2: "Histoire, botanique, agriculture, énergie, biodiversité, gastronomie se dévoilent au fil d'espaces thématiques où l'on devient tour à tour acteur ou spectateur d'une aventure sensorielle et ludique qui émerveille petits et grands.",
+      cardsEyebrow: "Les 4 piliers de la visite",
       cards: [
         { n: "01", title: "Un voyage dans l'histoire", body: "Traversez les salles d'une sucrerie figée dans le temps et suivez 250 ans de sucre, de commerce et des hommes qui l'ont fait vivre." },
         { n: "02", title: "Ludique et interactif", body: "Machines géantes, dispositifs interactifs et jeux pensés pour que les enfants explorent de la première à la dernière salle." },
