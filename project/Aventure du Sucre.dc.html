@@ -167,7 +167,6 @@
     <div style="max-width:1200px;margin:0 auto;padding:0 28px;">
       <div style="max-width:680px;">
         <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:{{ accent }};">{{ t.visitEyebrow }}</span>
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,54px);line-height:1.02;letter-spacing:-0.02em;margin:14px 0 0;text-wrap:balance;">{{ t.visitTitle }}</h2>
         <p style="font-size:18px;line-height:1.62;color:#5C4630;margin:18px 0 0;">{{ t.visitText }}</p>
       </div>
       <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;align-items:stretch;">
@@ -180,6 +179,7 @@
           </div>
           <div style="background:#FBF1DF;border:1px solid #EBD9BB;border-radius:18px;padding:24px 26px;">
             <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:{{ green }};">{{ t.priceLabel }}</div>
+            <p style="font-size:14px;color:#8A6A4C;line-height:1.5;margin:6px 0 0;">{{ t.priceInclude }}</p>
             <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;font-size:16px;">
               <span>{{ t.priceAdult }}</span>
               <span>{{ t.priceChild }}</span>
@@ -287,14 +287,13 @@ class Component extends DCLogic {
         boutiqueTitle: "Le Village Boutik",
         boutiqueText: "A selection of the finest local specialities to slip into your suitcase: unrefined cane sugars, award-winning New Grove rums, teas, spices, honeys, jams, vanilla and locally handcrafted creations, reflecting Mauritian know-how.",
         visitEyebrow: "Plan your visit",
-        visitTitle: "Everything you need to know",
         visitText: "Easy to reach, easy to enjoy. Here are the essentials — book online to skip the queue.",
-        hoursLabel: "Opening hours", hoursValue: "Monday – Sunday", hoursTime: "9:00 – 17:00", hoursNote: "Last entry 15:00",
-        priceLabel: "Tickets", priceAdult: "Adults — Rs 425", priceChild: "Children 6–12 — Rs 215", priceFree: "Under 6 — free", priceFamily: "Family passes available",
-        locLabel: "Getting here", locValue: "Beau Plan, Pamplemousses", locNote: "15 min from Port Louis · Free parking · Next to the SSR Botanical Garden",
+        hoursLabel: "Opening hours", hoursValue: "Monday – Saturday", hoursTime: "10:00 – 16:00", hoursNote: "Recommended last entry: 15:15",
+        priceLabel: "Tickets", priceInclude: "Ticket: includes the audio guide in 9 languages and tastings of sugars, jams, honeys and vanilla (rum tasting reserved for adults), plus a games booklet — a real treasure hunt through the museum — with a small gift at the end.", priceAdult: "Adult — Rs 1,200", priceChild: "Young (6–18 & students) — Rs 600 (includes games trail + gift)", priceFree: "Under 6 — free (includes toddler trail)", priceFamily: "10% discount for families",
+        locLabel: "Getting here", locValue: "Beau Plan, Pamplemousses", locNote: "15 min from Port Louis and Grand Baie · Near the Pamplemousses Botanical Garden. Free parking",
         visitBook: "Book tickets online",
-        ctaTitle: "Ready for a sweet day out?",
-        ctaText: "Book online in a couple of taps and walk straight in.",
+        ctaTitle: "Ready to taste the adventure?",
+        ctaText: "Book online in a few clicks and savour the experience.",
         ctaBook: "Book your tickets",
         footerTagline: "The story of sugar, rum and Mauritius — under one roof.",
         footerAddress: "Beau Plan, Pamplemousses, Mauritius",
@@ -341,14 +340,13 @@ class Component extends DCLogic {
         boutiqueTitle: "Le Village Boutik",
         boutiqueText: "Une sélection des meilleures spécialités locales à glisser dans vos valises : sucres de canne non raffinés, rhums New Grove primés, thés, épices, miels, confitures, vanille et créations artisanales locales, reflets du savoir-faire mauricien.",
         visitEyebrow: "Planifiez votre visite",
-        visitTitle: "Tout ce qu'il faut savoir",
         visitText: "Facile d'accès, facile à apprécier. L'essentiel est ici — réservez en ligne pour éviter la file.",
-        hoursLabel: "Horaires", hoursValue: "Lundi – Dimanche", hoursTime: "9h00 – 17h00", hoursNote: "Dernière entrée 15h00",
-        priceLabel: "Billets", priceAdult: "Adultes — Rs 425", priceChild: "Enfants 6–12 ans — Rs 215", priceFree: "Moins de 6 ans — gratuit", priceFamily: "Forfaits famille disponibles",
-        locLabel: "Comment venir", locValue: "Beau Plan, Pamplemousses", locNote: "15 min de Port-Louis · Parking gratuit · À côté du Jardin botanique de Pamplemousses",
+        hoursLabel: "Horaires d'ouverture", hoursValue: "Lundi – Samedi", hoursTime: "10h00 – 16h00", hoursNote: "Dernière entrée recommandée : 15h15",
+        priceLabel: "Billets", priceInclude: "Billet : inclut l'audioguide en 9 langues et les dégustations de sucres, confitures, miels et vanille (dégustation de rhums réservée aux adultes), plus un carnet de jeux — une véritable chasse au trésor à travers le musée — avec un petit cadeau à la clé.", priceAdult: "Adulte — Rs 1 200", priceChild: "Jeune (6-18 ans et étudiant) — Rs 600 (inclut le parcours jeux + cadeau)", priceFree: "Moins de 6 ans — gratuit (inclut le parcours bambin)", priceFamily: "10% de réduction pour les familles",
+        locLabel: "Comment venir", locValue: "Beau Plan, Pamplemousses", locNote: "15 min de Port-Louis et Grand Baie · Près du Jardin botanique de Pamplemousses. Parking gratuit",
         visitBook: "Réserver en ligne",
-        ctaTitle: "Prêt pour une douce journée ?",
-        ctaText: "Réservez en ligne en quelques secondes et entrez directement.",
+        ctaTitle: "Prêt·e à goûter à cette aventure ?",
+        ctaText: "Réservez en ligne en quelques clics pour savourer l'expérience.",
         ctaBook: "Réservez vos billets",
         footerTagline: "L'histoire du sucre, du rhum et de Maurice — sous un même toit.",
         footerAddress: "Beau Plan, Pamplemousses, Île Maurice",
