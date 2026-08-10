@@ -173,8 +173,10 @@
 
   /* ── Stats band ─────────────────────────────────────── */
   .stats{background:var(--dark);color:var(--dark-text);}
+  .stats-head{max-width:1200px;margin:0 auto;padding:40px 28px 0;}
+  .stats-eyebrow{color:var(--amber);}
   .stats-grid{
-    max-width:1200px;margin:0 auto;padding:40px 28px;
+    max-width:1200px;margin:0 auto;padding:24px 28px 40px;
     display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;
   }
   .stat{display:flex;flex-direction:column;gap:6px;padding:8px 0 8px 18px;border-left:2px solid rgba(240,169,75,0.4);}
@@ -428,12 +430,15 @@
           <span class="chip">🕘 <span data-i18n="chip1"></span></span>
           <span class="chip">⏱ <span data-i18n="chip2"></span></span>
           <span class="chip">👶 <span data-i18n="chip3"></span></span>
+          <span class="chip">🏛 <span data-i18n="chip4"></span></span>
+          <span class="chip">🏆 <span data-i18n="chip5"></span></span>
         </div>
       </div>
     </div>
   </section>
 
   <section class="stats">
+    <div class="stats-head"><span class="eyebrow stats-eyebrow" data-i18n="statsEyebrow"></span></div>
     <div class="stats-grid" id="stats-grid"></div>
   </section>
 
@@ -649,7 +654,8 @@
       heroTitle: "The sweetest adventure on the island",
       heroText: "Step inside a 260-year-old sugar factory. Taste rare rums, discover sugars you never knew existed, and follow the story that shaped Mauritius — a half-day out the whole family will remember.",
       heroBook: "Book your tickets", heroPlan: "Plan your visit",
-      chip1: "Open 7 days · 9am–5pm", chip2: "Around 1.5 hrs", chip3: "Under 6s go free",
+      chip1: "Open 6 days a week – 10am–4pm", chip2: "Around 1.5 hrs // Audio guide in 9 languages", chip3: "Under 6s go free", chip4: "Mauritius' #1 cultural site", chip5: "TripAdvisor Certificate of Excellence",
+      statsEyebrow: "At a glance",
       stats: [
         { num: "260", label: "years of sugar history" },
         { num: "5,000 m²", label: "of factory to explore" },
@@ -707,11 +713,12 @@
       brandTag: "Musée du Sucre · Île Maurice",
       navExp: "L'expérience", navTaste: "Dégustations", navVisit: "Infos pratiques", navBook: "Réserver",
       langToggle: "English",
-      heroEyebrow: "Beau Plan · Nord de l'île Maurice",
-      heroTitle: "La plus douce aventure de l'île",
-      heroText: "Entrez dans une sucrerie vieille de 260 ans. Dégustez des rhums rares, découvrez des sucres insoupçonnés et suivez l'histoire qui a façonné Maurice — une demi-journée que toute la famille gardera en mémoire.",
+      heroEyebrow: "15min de Port Louis et Grand Baie – Parking gratuit – Près du Jardin botanique de Pamplemousses",
+      heroTitle: "Un voyage qui se déguste",
+      heroText: "Une sucrerie de 260 ans vous plonge dans l'histoire de Maurice, son peuple et ses savoir-faire, à travers la canne à sucre. Poursuivez l'expérience dans nos espaces de dégustation : 17 savoureux rhums primés, et une collection de sucres rares aux notes de vanille, miel, caramel et réglisse. Une immersion à vivre avec les 5 sens.",
       heroBook: "Réservez vos billets", heroPlan: "Préparer sa visite",
-      chip1: "Ouvert 7j/7 · 9h–17h", chip2: "Environ 1h30", chip3: "Gratuit pour les -6 ans",
+      chip1: "Ouvert 6/7 – 10h00-16h00", chip2: "Environ 1h30 // Audioguide en 9 langues", chip3: "Gratuit pour les moins de 6 ans", chip4: "1er site culturel de Maurice", chip5: "Certificat d'Excellence TripAdvisor",
+      statsEyebrow: "En quelques chiffres",
       stats: [
         { num: "260", label: "ans d'histoire du sucre" },
         { num: "5 000 m²", label: "de sucrerie à explorer" },
