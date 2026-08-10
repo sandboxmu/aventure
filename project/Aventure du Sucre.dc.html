@@ -83,7 +83,7 @@
       <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#F0A94B;">{{ t.statsEyebrow }}</span>
     </div>
     <div style="max-width:1200px;margin:0 auto;padding:24px 28px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;">
-      <sc-for list="{{ t.stats }}" as="s" hint-placeholder-count="4">
+      <sc-for list="{{ t.stats }}" as="s" hint-placeholder-count="5">
         <div style="display:flex;flex-direction:column;gap:6px;padding:8px 0;border-left:2px solid rgba(240,169,75,0.4);padding-left:18px;">
           <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,44px);line-height:1;color:#F0A94B;">{{ s.num }}</span>
           <span style="font-size:14px;color:#D8C09E;line-height:1.35;">{{ s.label }}</span>
@@ -253,6 +253,7 @@ class Component extends DCLogic {
         statsEyebrow: "At a glance",
         stats: [
           { num: "260", label: "years of sugar history" },
+          { num: "400", label: "years of Mauritian history" },
           { num: "5,000 m²", label: "of factory to explore" },
           { num: "11", label: "local rums to taste" },
           { num: "20+", label: "special sugars to try" },
@@ -303,6 +304,7 @@ class Component extends DCLogic {
         statsEyebrow: "En quelques chiffres",
         stats: [
           { num: "260", label: "ans d'histoire du sucre" },
+          { num: "400", label: "ans d'histoire mauricienne" },
           { num: "5 000 m²", label: "de sucrerie à explorer" },
           { num: "11", label: "rhums locaux à déguster" },
           { num: "20+", label: "sucres spéciaux à goûter" },
