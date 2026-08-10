@@ -79,7 +79,10 @@
   </section>
 
   <section style="background:#23140C;color:#F6E7CE;">
-    <div style="max-width:1200px;margin:0 auto;padding:40px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;">
+    <div style="max-width:1200px;margin:0 auto;padding:40px 28px 0;">
+      <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#F0A94B;">{{ t.statsEyebrow }}</span>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;padding:24px 28px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;">
       <sc-for list="{{ t.stats }}" as="s" hint-placeholder-count="4">
         <div style="display:flex;flex-direction:column;gap:6px;padding:8px 0;border-left:2px solid rgba(240,169,75,0.4);padding-left:18px;">
           <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,3.6vw,44px);line-height:1;color:#F0A94B;">{{ s.num }}</span>
@@ -247,6 +250,7 @@ class Component extends DCLogic {
         heroText: "Step inside a 260-year-old sugar factory. Taste rare rums, discover sugars you never knew existed, and follow the story that shaped Mauritius — a half-day out the whole family will remember.",
         heroBook: "Book your tickets", heroPlan: "Plan your visit",
         chip1: "Open 6 days a week – 10am–4pm", chip2: "Around 1.5 hrs // Audio guide in 9 languages", chip3: "Under 6s go free", chip4: "Mauritius' #1 cultural site", chip5: "TripAdvisor Certificate of Excellence",
+        statsEyebrow: "By the numbers",
         stats: [
           { num: "260", label: "years of sugar history" },
           { num: "5,000 m²", label: "of factory to explore" },
@@ -296,6 +300,7 @@ class Component extends DCLogic {
         heroText: "Une sucrerie de 260 ans vous plonge dans l'histoire de Maurice, son peuple et ses savoir-faire, à travers la canne à sucre. Poursuivez l'expérience dans nos espaces de dégustation : 17 savoureux rhums primés, et une collection de sucres rares aux notes de vanille, miel, caramel et réglisse. Une immersion à vivre avec les 5 sens.",
         heroBook: "Réservez vos billets", heroPlan: "Préparer sa visite",
         chip1: "Ouvert 6/7 – 10h00-16h00", chip2: "Environ 1h30 // Audioguide en 9 langues", chip3: "Gratuit pour les moins de 6 ans", chip4: "1er site culturel de Maurice", chip5: "Certificat d'Excellence TripAdvisor",
+        statsEyebrow: "En quelques chiffres",
         stats: [
           { num: "260", label: "ans d'histoire du sucre" },
           { num: "5 000 m²", label: "de sucrerie à explorer" },
