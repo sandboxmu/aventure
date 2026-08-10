@@ -198,6 +198,8 @@
   }
   .feature-img img{width:100%;height:100%;object-fit:cover;}
   .cards{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px;}
+  .cards-head{margin-top:44px;}
+  .cards-head + .cards{margin-top:18px;}
   .card{
     background:var(--cream-card);border:1px solid #EBD9BB;border-radius:20px;padding:30px 26px;
     display:flex;flex-direction:column;gap:12px;transition:transform .2s ease,box-shadow .2s ease;
@@ -448,10 +450,12 @@
         <span class="eyebrow" data-i18n="expEyebrow"></span>
         <h2 data-i18n="expTitle"></h2>
         <p data-i18n="expText"></p>
+        <p data-i18n="expText2"></p>
       </div>
       <div class="feature-img">
         <img src="/assets/expFeature.webp" alt="Inside the museum: historic sugar-factory machinery">
       </div>
+      <div class="cards-head"><span class="eyebrow" data-i18n="cardsEyebrow"></span></div>
       <div class="cards" id="cards-grid"></div>
     </div>
   </section>
@@ -657,14 +661,17 @@
       chip1: "Open 6 days a week – 10am–4pm", chip2: "Around 1.5 hrs // Audio guide in 9 languages", chip3: "Under 6s go free", chip4: "Mauritius' #1 cultural site", chip5: "TripAdvisor Certificate of Excellence",
       statsEyebrow: "At a glance",
       stats: [
-        { num: "260", label: "years of sugar history" },
-        { num: "5,000 m²", label: "of factory to explore" },
-        { num: "11", label: "local rums to taste" },
-        { num: "20+", label: "special sugars to try" },
+        { num: "260", label: "years as a sugar factory" },
+        { num: "400", label: "years of Mauritian history" },
+        { num: "5,000 m²", label: "to explore" },
+        { num: "17", label: "award-winning rums to taste" },
+        { num: "12", label: "unrefined sugars to discover" },
       ],
       expEyebrow: "The Experience",
       expTitle: "What's waiting inside",
-      expText: "One ticket, a dozen discoveries. Wander a real 1797 factory at your own pace — with plenty to keep curious kids busy along the way.",
+      expText: "More than 5,000 m² to explore inside a former 19th-century sugar factory. Interactive displays, archive images, animated models, sound installations and large-format film bring the place back to life, telling how sugar cane shaped the landscapes, the communities and the history of Mauritius.",
+      expText2: "History, botany, agriculture, energy, biodiversity and gastronomy unfold across themed spaces where you become, by turns, participant and spectator in a playful, sensory adventure that delights young and old alike.",
+      cardsEyebrow: "The four pillars of your visit",
       cards: [
         { n: "01", title: "Journey through history", body: "Walk the halls of a working factory frozen in time and follow 250 years of sugar, trade and the people behind it." },
         { n: "02", title: "Hands-on & playful", body: "Giant machines, interactive exhibits and games designed to keep children exploring from the first room to the last." },
@@ -675,9 +682,9 @@
       tasteTitle: "A treat for every sense",
       tasteText: "The tour ends the best way it can — with something to sip and savour before you go.",
       rumTitle: "The rum tasting bar",
-      rumText: "Sip through eleven local rums, from smooth agricole to spiced island blends. Our hosts talk you through every glass — so you leave knowing exactly which bottle to take home.",
+      rumText: "Sip through seventeen award-winning rums, from smooth agricole to spiced island blends. Our hosts talk you through every glass — so you leave knowing exactly which bottle to take home.",
       sugarTitle: "The sugar experience",
-      sugarText: "Sweet, smoky, caramel, molasses. Discover how a single stick of cane becomes twenty extraordinary sugars, and taste the difference for yourself.",
+      sugarText: "Sweet, smoky, caramel, molasses. Discover how a single stick of cane becomes twelve unrefined sugars, and taste the difference for yourself.",
       fangourinTitle: "Le Fangourin restaurant",
       fangourinText: "Island flavours and sugar-inspired desserts on a terrace looking out over the old factory.",
       boutiqueTitle: "The boutique",
@@ -720,14 +727,17 @@
       chip1: "Ouvert 6/7 – 10h00-16h00", chip2: "Environ 1h30 // Audioguide en 9 langues", chip3: "Gratuit pour les moins de 6 ans", chip4: "1er site culturel de Maurice", chip5: "Certificat d'Excellence TripAdvisor",
       statsEyebrow: "En quelques chiffres",
       stats: [
-        { num: "260", label: "ans d'histoire du sucre" },
-        { num: "5 000 m²", label: "de sucrerie à explorer" },
-        { num: "11", label: "rhums locaux à déguster" },
-        { num: "20+", label: "sucres spéciaux à goûter" },
+        { num: "260", label: "ans d'usine sucrière" },
+        { num: "400", label: "ans d'histoire mauricienne" },
+        { num: "5 000 m²", label: "à explorer" },
+        { num: "17", label: "rhums primés à déguster" },
+        { num: "12", label: "sucres non raffinés à découvrir" },
       ],
       expEyebrow: "L'expérience",
       expTitle: "Ce qui vous attend à l'intérieur",
-      expText: "Un billet, mille découvertes. Parcourez une véritable sucrerie de 1797 à votre rythme — avec de quoi occuper les enfants curieux à chaque étape.",
+      expText: "Plus de 5 000 m² à explorer au cœur d'une ancienne sucrerie du XIXᵉ siècle. Dispositifs interactifs, images d'archives, maquettes animées, installations sonores et vidéos grand format redonnent vie aux lieux et racontent comment la canne à sucre a façonné les paysages, les communautés et l'histoire de Maurice.",
+      expText2: "Histoire, botanique, agriculture, énergie, biodiversité, gastronomie se dévoilent au fil d'espaces thématiques où l'on devient tour à tour acteur ou spectateur d'une aventure sensorielle et ludique qui émerveille petits et grands.",
+      cardsEyebrow: "Les 4 piliers de la visite",
       cards: [
         { n: "01", title: "Un voyage dans l'histoire", body: "Traversez les salles d'une sucrerie figée dans le temps et suivez 250 ans de sucre, de commerce et des hommes qui l'ont fait vivre." },
         { n: "02", title: "Ludique et interactif", body: "Machines géantes, dispositifs interactifs et jeux pensés pour que les enfants explorent de la première à la dernière salle." },
@@ -738,9 +748,9 @@
       tasteTitle: "Un plaisir pour tous les sens",
       tasteText: "La visite se termine de la plus belle des façons — avec de quoi déguster et savourer avant de repartir.",
       rumTitle: "Le bar de dégustation de rhums",
-      rumText: "Dégustez onze rhums locaux, de l'agricole tout en rondeur aux assemblages épicés. Nos hôtes vous guident verre après verre — pour repartir avec la bouteille qu'il vous faut.",
+      rumText: "Dégustez dix-sept rhums primés, de l'agricole tout en rondeur aux assemblages épicés. Nos hôtes vous guident verre après verre — pour repartir avec la bouteille qu'il vous faut.",
       sugarTitle: "L'expérience du sucre",
-      sugarText: "Doux, fumé, caramel, mélasse. Découvrez comment une simple canne devient vingt sucres extraordinaires, et goûtez la différence.",
+      sugarText: "Doux, fumé, caramel, mélasse. Découvrez comment une simple canne devient douze sucres non raffinés, et goûtez la différence.",
       fangourinTitle: "Restaurant Le Fangourin",
       fangourinText: "Saveurs de l'île et desserts au sucre, sur une terrasse face à l'ancienne sucrerie.",
       boutiqueTitle: "La boutique",
