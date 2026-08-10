@@ -200,6 +200,7 @@
   .cards{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:22px;}
   .cards-head{margin-top:44px;}
   .cards-head + .cards{margin-top:18px;}
+  .cards-cta{margin-top:34px;text-align:center;}
   .card{
     background:var(--cream-card);border:1px solid #EBD9BB;border-radius:20px;padding:30px 26px;
     display:flex;flex-direction:column;gap:12px;transition:transform .2s ease,box-shadow .2s ease;
@@ -457,6 +458,9 @@
       </div>
       <div class="cards-head"><span class="eyebrow" data-i18n="cardsEyebrow"></span></div>
       <div class="cards" id="cards-grid"></div>
+      <div class="cards-cta">
+        <button class="btn btn-book-lg" data-action="book" data-i18n="cardsBook"></button>
+      </div>
     </div>
   </section>
 
@@ -499,6 +503,9 @@
           <h4 data-i18n="boutiqueTitle"></h4>
           <p data-i18n="boutiqueText"></p>
         </div>
+      </div>
+      <div class="cards-cta">
+        <button class="btn btn-book-lg" data-action="book" data-i18n="venuesBook"></button>
       </div>
     </div>
   </section>
@@ -673,6 +680,7 @@
       expText: "More than 5,000 m² to explore inside a former 19th-century sugar factory. Interactive displays, archive images, animated models, sound installations and large-format film bring the place back to life, telling how sugar cane shaped the landscapes, the communities and the history of Mauritius.",
       expText2: "History, botany, agriculture, energy, biodiversity and gastronomy unfold across themed spaces where you become, by turns, participant and spectator in a playful, sensory adventure that delights young and old alike.",
       cardsEyebrow: "The four pillars of your visit",
+      cardsBook: "Book your tickets",
       cards: [
         { n: "01", title: "A journey through history", body: "More than 400 years to understand how sugar cane, Mauritius' emblematic plant, shaped the country's society, landscape and identity." },
         { n: "02", title: "Hands-on & playful", body: "Monumental machinery, giant screens, interactive games, scent stations, multimedia and immersive soundscapes set the pace of the visit for kids and adults alike." },
@@ -691,6 +699,7 @@
       fangourinText: "Extend your discovery of Mauritian flavours with reinvented local cuisine, generous and elegant, crafted from local produce. Signature cocktails with New Grove rum, desserts inspired by our famous unrefined cane sugars, and a lush setting at the heart of the Beau Plan estate.",
       boutiqueTitle: "Le Village Boutik",
       boutiqueText: "A selection of the finest local specialities to slip into your suitcase: unrefined cane sugars, award-winning New Grove rums, teas, spices, honeys, jams, vanilla and locally handcrafted creations, reflecting Mauritian know-how.",
+      venuesBook: "Book your tickets",
       visitEyebrow: "Plan your visit",
       visitText: "Easy to reach, easy to enjoy. Here are the essentials — book online to skip the queue.",
       hoursLabel: "Opening hours", hoursValue: "Monday – Saturday", hoursTime: "10:00 – 16:00", hoursNote: "Recommended last entry: 15:15",
@@ -739,6 +748,7 @@
       expText: "Plus de 5 000 m² à explorer au cœur d'une ancienne sucrerie du XIXᵉ siècle. Dispositifs interactifs, images d'archives, maquettes animées, installations sonores et vidéos grand format redonnent vie aux lieux et racontent comment la canne à sucre a façonné les paysages, les communautés et l'histoire de Maurice.",
       expText2: "Histoire, botanique, agriculture, énergie, biodiversité, gastronomie se dévoilent au fil d'espaces thématiques où l'on devient tour à tour acteur ou spectateur d'une aventure sensorielle et ludique qui émerveille petits et grands.",
       cardsEyebrow: "Les 4 piliers de la visite",
+      cardsBook: "Réservez vos billets",
       cards: [
         { n: "01", title: "Un voyage à travers l'histoire", body: "Plus de 400 ans pour comprendre comment la canne à sucre, plante emblématique de Maurice, a façonné la société, le paysage et l'identité du pays." },
         { n: "02", title: "Ludique et interactif", body: "Machinerie monumentale, écrans géants, jeux interactifs, odorama, multimédias et ambiances sonores immersives rythment la visite des petits comme des grands." },
@@ -757,6 +767,7 @@
       fangourinText: "Prolongez votre découverte des saveurs mauriciennes avec une cuisine locale revisitée, généreuse et élégante, élaborée à partir de produits du terroir. Cocktails signature aux rhums New Grove, desserts inspirés des célèbres sucres de canne non raffinés et cadre verdoyant au cœur du domaine de Beau Plan.",
       boutiqueTitle: "Le Village Boutik",
       boutiqueText: "Une sélection des meilleures spécialités locales à glisser dans vos valises : sucres de canne non raffinés, rhums New Grove primés, thés, épices, miels, confitures, vanille et créations artisanales locales, reflets du savoir-faire mauricien.",
+      venuesBook: "Réservez vos billets",
       visitEyebrow: "Planifiez votre visite",
       visitText: "Facile d'accès, facile à apprécier. L'essentiel est ici — réservez en ligne pour éviter la file.",
       hoursLabel: "Horaires d'ouverture", hoursValue: "Lundi – Samedi", hoursTime: "10h00 – 16h00", hoursNote: "Dernière entrée recommandée : 15h15",
