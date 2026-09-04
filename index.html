@@ -338,37 +338,14 @@
   .modal-sub{font-size:14.5px;line-height:1.5;color:#6B543C;margin:10px 0 22px;}
   .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
   .field > span{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:#4A3320;}
-  .field input{
+  .field input,.field textarea{
     font-family:var(--body);font-size:15px;color:var(--ink);
     padding:11px 14px;border:1px solid #D8C29B;border-radius:12px;background:var(--cream-card);
-    transition:border-color .15s ease,box-shadow .15s ease;
+    transition:border-color .15s ease,box-shadow .15s ease;resize:vertical;
   }
-  .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,89,28,0.14);}
-  .field input:invalid:not(:placeholder-shown){border-color:#B4432B;}
-  .qty-list{display:flex;flex-direction:column;gap:10px;margin:20px 0 6px;}
-  .qty-row{
-    display:flex;align-items:center;gap:12px;
-    background:var(--cream-card);border:1px solid #EBD9BB;border-radius:14px;padding:12px 14px;
-  }
-  .qty-info{flex:1;display:flex;flex-direction:column;gap:1px;}
-  .qty-name{font-weight:600;font-size:15px;color:var(--ink);}
-  .qty-price{font-size:13px;color:#8A6A4C;}
-  .stepper{display:flex;align-items:center;gap:10px;}
-  .step{
-    width:30px;height:30px;border-radius:50%;border:1px solid #D8C29B;background:var(--cream);
-    color:var(--accent);font-size:18px;line-height:1;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;transition:border-color .15s ease,color .15s ease;
-  }
-  .step:hover:not(:disabled){border-color:var(--accent);}
-  .step:disabled{opacity:.4;cursor:not-allowed;}
-  .step-val{min-width:20px;text-align:center;font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);}
-  .total-row{
-    display:flex;align-items:baseline;justify-content:space-between;
-    margin:18px 0 20px;padding-top:16px;border-top:1px solid #E5D2AF;
-  }
-  .total-row span{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4A3320;}
-  .total-row strong{font-family:var(--display);font-weight:700;font-size:28px;color:var(--accent);letter-spacing:-0.01em;}
-  .modal-submit{width:100%;padding:15px;font-size:16px;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,89,28,0.14);}
+  .field input:invalid:not(:placeholder-shown),.field textarea:invalid:not(:placeholder-shown){border-color:#B4432B;}
+  .modal-submit{width:100%;padding:15px;font-size:16px;margin-top:6px;}
   .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
   .success{text-align:center;padding:8px 0;}
   .success-check{
@@ -621,50 +598,13 @@
             <input type="email" name="email" required autocomplete="email" placeholder=" ">
           </label>
           <label class="field">
-            <span data-i18n="formDate"></span>
-            <input type="date" name="date" required placeholder=" ">
+            <span data-i18n="formPhone"></span>
+            <input type="tel" name="phone" required autocomplete="tel" placeholder=" ">
           </label>
-
-          <div class="qty-list">
-            <div class="qty-row">
-              <div class="qty-info">
-                <span class="qty-name" data-i18n="formAdults"></span>
-                <span class="qty-price">Rs 425</span>
-              </div>
-              <div class="stepper" data-field="adults" data-min="1">
-                <button class="step" type="button" data-dir="-1" aria-label="Decrease adults">&minus;</button>
-                <output class="step-val">2</output>
-                <button class="step" type="button" data-dir="1" aria-label="Increase adults">+</button>
-              </div>
-            </div>
-            <div class="qty-row">
-              <div class="qty-info">
-                <span class="qty-name" data-i18n="formChildren"></span>
-                <span class="qty-price">Rs 215</span>
-              </div>
-              <div class="stepper" data-field="children" data-min="0">
-                <button class="step" type="button" data-dir="-1" aria-label="Decrease children">&minus;</button>
-                <output class="step-val">0</output>
-                <button class="step" type="button" data-dir="1" aria-label="Increase children">+</button>
-              </div>
-            </div>
-            <div class="qty-row">
-              <div class="qty-info">
-                <span class="qty-name" data-i18n="formUnder6"></span>
-                <span class="qty-price" data-i18n="formUnder6Note"></span>
-              </div>
-              <div class="stepper" data-field="under6" data-min="0">
-                <button class="step" type="button" data-dir="-1" aria-label="Decrease under 6">&minus;</button>
-                <output class="step-val">0</output>
-                <button class="step" type="button" data-dir="1" aria-label="Increase under 6">+</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="total-row">
-            <span data-i18n="formTotal"></span>
-            <strong id="total-amount">Rs 0</strong>
-          </div>
+          <label class="field">
+            <span data-i18n="formMessage"></span>
+            <textarea name="message" rows="4" required placeholder=" "></textarea>
+          </label>
 
           <button type="submit" class="btn btn-primary modal-submit" data-i18n="formSubmit"></button>
           <p class="modal-fineprint" data-i18n="formFineprint"></p>
@@ -743,16 +683,14 @@
       pageTitle: "L'Aventure du Sucre — The sweetest adventure in Mauritius",
       metaDesc: "Step inside a 260-year-old sugar factory in Beau Plan, Mauritius. Taste rare rums, discover extraordinary sugars, and book your family day out.",
       bookModalTitle: "Book your visit",
-      bookModalSubtitle: "Reserve your tickets to L'Aventure du Sucre — we'll send your confirmation by email.",
-      formName: "Full name", formEmail: "Email", formDate: "Visit date",
-      formAdults: "Adults", formChildren: "Children (6–12)", formUnder6: "Under 6", formUnder6Note: "Free",
-      formTotal: "Total", formSubmit: "Confirm booking",
-      formFineprint: "Demo form — no payment is taken and no ticket is issued.",
-      formSuccessTitle: "Booking received!",
-      formSuccessText: "Thank you, {name}. A confirmation for {count} on {date} is on its way to {email}.",
-      formTicketOne: "1 ticket", formTicketMany: "{n} tickets",
-      formAgain: "Book another visit",
-      formNeedTickets: "Please add at least one ticket.",
+      bookModalSubtitle: "Send us your details and our team will get back to you to confirm your visit.",
+      formName: "Full Name", formEmail: "Email", formPhone: "Phone", formMessage: "Message",
+      formSubmit: "Submit",
+      formFineprint: "This opens your email app with your message ready to send to our team.",
+      mailSubject: "New reservation request from {name}",
+      formSuccessTitle: "Almost there!",
+      formSuccessText: "Thank you, {name}. Your email app should now be open with your message ready to send — please hit send to reach our team.",
+      formAgain: "Send another message",
     },
     fr: {
       brandTag: "Musée du Sucre · Île Maurice",
@@ -815,16 +753,14 @@
       pageTitle: "L'Aventure du Sucre — La plus douce aventure de l'île Maurice",
       metaDesc: "Entrez dans une sucrerie vieille de 260 ans à Beau Plan, Maurice. Dégustez des rhums rares, découvrez des sucres extraordinaires et réservez votre sortie en famille.",
       bookModalTitle: "Réservez votre visite",
-      bookModalSubtitle: "Réservez vos billets pour L'Aventure du Sucre — nous vous enverrons votre confirmation par e-mail.",
-      formName: "Nom complet", formEmail: "E-mail", formDate: "Date de visite",
-      formAdults: "Adultes", formChildren: "Enfants (6–12 ans)", formUnder6: "Moins de 6 ans", formUnder6Note: "Gratuit",
-      formTotal: "Total", formSubmit: "Confirmer la réservation",
-      formFineprint: "Formulaire de démonstration — aucun paiement n'est prélevé et aucun billet n'est émis.",
-      formSuccessTitle: "Réservation reçue !",
-      formSuccessText: "Merci, {name}. Une confirmation pour {count} le {date} est en route vers {email}.",
-      formTicketOne: "1 billet", formTicketMany: "{n} billets",
-      formAgain: "Réserver une autre visite",
-      formNeedTickets: "Veuillez ajouter au moins un billet.",
+      bookModalSubtitle: "Envoyez-nous vos coordonnées, notre équipe vous recontactera pour confirmer votre visite.",
+      formName: "Nom complet", formEmail: "E-mail", formPhone: "Téléphone", formMessage: "Message",
+      formSubmit: "Envoyer",
+      formFineprint: "Ceci ouvre votre application e-mail avec votre message prêt à être envoyé à notre équipe.",
+      mailSubject: "Nouvelle demande de réservation de {name}",
+      formSuccessTitle: "Presque terminé !",
+      formSuccessText: "Merci, {name}. Votre application e-mail devrait maintenant être ouverte avec votre message prêt à envoyer — il ne reste plus qu'à cliquer sur envoyer pour joindre notre équipe.",
+      formAgain: "Envoyer un autre message",
     },
   };
 
@@ -910,36 +846,13 @@
   window.addEventListener("resize", () => { if (window.innerWidth > 860) closeMenu(); });
 
   /* ── Booking modal ─────────────────────────────────── */
-  const PRICES = { adults: 425, children: 215, under6: 0 };
-  const MAX_PER_TYPE = 20;
-  const counts = { adults: 2, children: 0, under6: 0 };
+  const RESERVATION_EMAILS = ["reservation@aventuredusucre.com", "administration@aventuredusucre.com"];
 
   const modal = document.getElementById("book-modal");
   const formView = document.getElementById("modal-form-view");
   const successView = document.getElementById("modal-success-view");
   const bookForm = document.getElementById("book-form");
   let lastFocused = null;
-
-  function groupNum(n, sep) {
-    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep);
-  }
-  function fmtMoney(n) {
-    return "Rs " + groupNum(n, lang === "fr" ? " " : ",");
-  }
-
-  function updateTotal() {
-    const total = counts.adults * PRICES.adults + counts.children * PRICES.children;
-    document.getElementById("total-amount").textContent = fmtMoney(total);
-    modal.querySelectorAll(".stepper").forEach((st) => {
-      const field = st.getAttribute("data-field");
-      const min = parseInt(st.getAttribute("data-min"), 10) || 0;
-      st.querySelector(".step-val").textContent = counts[field];
-      const dec = st.querySelector('[data-dir="-1"]');
-      const inc = st.querySelector('[data-dir="1"]');
-      if (dec) dec.disabled = counts[field] <= min;
-      if (inc) inc.disabled = counts[field] >= MAX_PER_TYPE;
-    });
-  }
 
   function openModal() {
     closeMenu();
@@ -949,8 +862,6 @@
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
-    bookForm.elements.date.min = new Date().toISOString().slice(0, 10);
-    updateTotal();
     setTimeout(() => bookForm.elements.name.focus(), 60);
   }
 
@@ -963,53 +874,41 @@
 
   function resetModal() {
     bookForm.reset();
-    counts.adults = 2; counts.children = 0; counts.under6 = 0;
     successView.hidden = true;
     formView.hidden = false;
-    updateTotal();
     bookForm.elements.name.focus();
   }
 
-  // Steppers + backdrop click (backdrop element === modal itself).
+  // Backdrop click (backdrop element === modal itself).
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) { closeModal(); return; }
-    const step = e.target.closest(".step");
-    if (!step) return;
-    const st = step.closest(".stepper");
-    const field = st.getAttribute("data-field");
-    const min = parseInt(st.getAttribute("data-min"), 10) || 0;
-    const dir = parseInt(step.getAttribute("data-dir"), 10);
-    counts[field] = Math.max(min, Math.min(MAX_PER_TYPE, counts[field] + dir));
-    updateTotal();
+    if (e.target === modal) closeModal();
   });
 
   bookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const t = STRINGS[lang];
-    const totalTickets = counts.adults + counts.children + counts.under6;
-    if (totalTickets < 1) { alert(t.formNeedTickets); return; }
     if (!bookForm.checkValidity()) { bookForm.reportValidity(); return; }
 
     const data = new FormData(bookForm);
     const name = (data.get("name") || "").toString().trim();
     const email = (data.get("email") || "").toString().trim();
-    const dateVal = (data.get("date") || "").toString();
-    let dateFmt = dateVal;
-    try {
-      dateFmt = new Date(dateVal + "T00:00:00").toLocaleDateString(
-        lang === "fr" ? "fr-FR" : "en-GB",
-        { day: "numeric", month: "long", year: "numeric" }
-      );
-    } catch (err) { /* fall back to raw value */ }
-    const countLabel = totalTickets === 1
-      ? t.formTicketOne
-      : t.formTicketMany.replace("{n}", totalTickets);
+    const phone = (data.get("phone") || "").toString().trim();
+    const message = (data.get("message") || "").toString().trim();
 
-    document.getElementById("success-text").textContent = t.formSuccessText
-      .replace("{name}", name)
-      .replace("{count}", countLabel)
-      .replace("{date}", dateFmt)
-      .replace("{email}", email);
+    const subject = t.mailSubject.replace("{name}", name);
+    const body = [
+      `${t.formName}: ${name}`,
+      `${t.formEmail}: ${email}`,
+      `${t.formPhone}: ${phone}`,
+      "",
+      `${t.formMessage}:`,
+      message,
+    ].join("\n");
+    const mailtoUrl = `mailto:${RESERVATION_EMAILS.join(",")}` +
+      `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
+
+    document.getElementById("success-text").textContent = t.formSuccessText.replace("{name}", name);
 
     formView.hidden = true;
     successView.hidden = false;
@@ -1035,7 +934,6 @@
   });
 
   render();
-  updateTotal();
 </script>
 </body>
 </html>
