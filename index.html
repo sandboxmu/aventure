@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'Aventure du Sucre — The sweetest adventure in Mauritius</title>
 <meta name="description" content="Step inside a 260-year-old sugar factory in Beau Plan, Mauritius. Taste rare rums, discover extraordinary sugars, and follow the story of sugar — a half-day out the whole family will remember.">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="/">
 <link rel="alternate" hreflang="en" href="/">
 <link rel="alternate" hreflang="fr" href="/fr">
@@ -345,6 +349,10 @@
   }
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,89,28,0.14);}
   .field input:invalid:not(:placeholder-shown),.field textarea:invalid:not(:placeholder-shown){border-color:#B4432B;}
+  .consent-label{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:#4A3320;margin:0 0 8px;}
+  .consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer;}
+  .consent-row input{margin-top:3px;width:16px;height:16px;flex:none;accent-color:var(--accent);cursor:pointer;}
+  .consent-row span{font-size:13.5px;line-height:1.5;color:#5C4630;}
   .modal-submit{width:100%;padding:15px;font-size:16px;margin-top:6px;}
   .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
   .success{text-align:center;padding:8px 0;}
@@ -606,6 +614,12 @@
             <textarea name="message" rows="4" required placeholder=" "></textarea>
           </label>
 
+          <p class="consent-label" data-i18n="formConsentLabel"></p>
+          <label class="consent-row">
+            <input type="checkbox" name="consent" required>
+            <span data-i18n="formConsentText"></span>
+          </label>
+
           <button type="submit" class="btn btn-primary modal-submit" data-i18n="formSubmit"></button>
           <p class="modal-fineprint" data-i18n="formFineprint"></p>
         </form>
@@ -685,6 +699,8 @@
       bookModalTitle: "Book your visit",
       bookModalSubtitle: "Send us your details and our team will get back to you to confirm your visit.",
       formName: "Full Name", formEmail: "Email", formPhone: "Phone", formMessage: "Message",
+      formConsentLabel: "Privacy Policy / Cookies:",
+      formConsentText: "I agree to the collection and use of my personal data as part of my ticket request.",
       formSubmit: "Submit",
       formFineprint: "This opens your email app with your message ready to send to our team.",
       mailSubject: "New reservation request from {name}",
@@ -755,6 +771,8 @@
       bookModalTitle: "Réservez votre visite",
       bookModalSubtitle: "Envoyez-nous vos coordonnées, notre équipe vous recontactera pour confirmer votre visite.",
       formName: "Nom complet", formEmail: "E-mail", formPhone: "Téléphone", formMessage: "Message",
+      formConsentLabel: "Politique de confidentialité / cookies :",
+      formConsentText: "J'accepte la collecte et l'utilisation de mes données personnelles dans le cadre de ma demande de billetterie.",
       formSubmit: "Envoyer",
       formFineprint: "Ceci ouvre votre application e-mail avec votre message prêt à être envoyé à notre équipe.",
       mailSubject: "Nouvelle demande de réservation de {name}",
