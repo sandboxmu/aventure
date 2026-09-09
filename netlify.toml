@@ -12,6 +12,10 @@
 
 # Booking form → Brevo. Must come before the catch-all below, otherwise the
 # SPA rewrite would answer the POST with index.html.
+#
+# The function deliberately does NOT declare its own `config.path`: doing so
+# removes its default /.netlify/functions/ URL, which this rule rewrites to,
+# and the two together produce a 404.
 [[redirects]]
   from = "/api/booking"
   to = "/.netlify/functions/booking"

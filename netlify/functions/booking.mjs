@@ -228,5 +228,3 @@ export default async (req) => {
 
   return json(200, { ok: true });
 };
-
-export const config = { path: "/api/booking" };
