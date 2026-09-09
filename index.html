@@ -361,6 +361,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .consent-row input{margin-top:3px;width:16px;height:16px;flex:none;accent-color:var(--accent);cursor:pointer;}
   .consent-row span{font-size:13.5px;line-height:1.5;color:#5C4630;}
   .modal-submit{width:100%;padding:15px;font-size:16px;margin-top:6px;}
+  .modal-submit[disabled]{opacity:.6;cursor:progress;}
+  .form-error{font-size:13px;color:#B3261E;text-align:center;margin:12px 0 0;line-height:1.45;}
   .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
   body.modal-open{overflow:hidden;}
 
@@ -599,9 +601,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 class="modal-title" id="book-modal-title" data-i18n="bookModalTitle"></h2>
         <p class="modal-sub" data-i18n="bookModalSubtitle"></p>
 
-        <form id="book-form" name="booking" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
-          <input type="hidden" name="form-name" value="booking">
-          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+        <form id="book-form" name="booking" method="POST" action="/api/booking" novalidate>
+          <p hidden><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <label class="field">
             <span data-i18n="formName"></span>
             <input type="text" name="name" required autocomplete="name" placeholder=" ">
@@ -626,6 +627,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </label>
 
           <button type="submit" class="btn btn-primary modal-submit" data-i18n="formSubmit"></button>
+          <p class="form-error" id="book-form-error" role="alert" hidden></p>
           <p class="modal-fineprint" data-i18n="formFineprint"></p>
         </form>
       </div>
@@ -700,8 +702,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       formConsentLabel: "Privacy Policy / Cookies:",
       formConsentText: "I agree to the collection and use of my personal data as part of my ticket request.",
       formSubmit: "Submit",
-      formFineprint: "This opens your email app with your message ready to send to our team.",
-      mailSubject: "New reservation request from {name}",
+      formSubmitting: "Sending…",
+      formFineprint: "We'll email you back to confirm your visit. Your details are never shared with anyone else.",
+      formError: "We couldn't send your request. Please try again, or email us at reservation@aventuredusucre.com.",
     },
     fr: {
       brandTag: "Musée du Sucre · Île Maurice",
@@ -769,8 +772,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       formConsentLabel: "Politique de confidentialité / cookies :",
       formConsentText: "J'accepte la collecte et l'utilisation de mes données personnelles dans le cadre de ma demande de billetterie.",
       formSubmit: "Envoyer",
-      formFineprint: "Ceci ouvre votre application e-mail avec votre message prêt à être envoyé à notre équipe.",
-      mailSubject: "Nouvelle demande de réservation de {name}",
+      formSubmitting: "Envoi en cours…",
+      formFineprint: "Nous vous répondrons par e-mail pour confirmer votre visite. Vos données ne sont jamais transmises à des tiers.",
+      formError: "Votre demande n'a pas pu être envoyée. Merci de réessayer ou de nous écrire à reservation@aventuredusucre.com.",
     },
   };
 
@@ -856,7 +860,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   window.addEventListener("resize", () => { if (window.innerWidth > 860) closeMenu(); });
 
   /* ── Booking modal ─────────────────────────────────── */
-  const RESERVATION_EMAILS = ["reservation@aventuredusucre.com", "administration@aventuredusucre.com"];
   const THANK_YOU_PAGE = { en: "thank-you.html", fr: "merci.html" };
 
   const modal = document.getElementById("book-modal");
@@ -884,52 +887,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (e.target === modal) closeModal();
   });
 
-  function encodeFormData(data) {
-    return Object.keys(data)
-      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
-  }
+  // Serverless function that talks to Brevo; the API key stays on the server.
+  const BOOKING_ENDPOINT = "/api/booking";
 
-  bookForm.addEventListener("submit", (e) => {
+  const formError = document.getElementById("book-form-error");
+  const submitBtn = bookForm.querySelector(".modal-submit");
+
+  bookForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const t = STRINGS[lang];
     if (!bookForm.checkValidity()) { bookForm.reportValidity(); return; }
 
     const data = new FormData(bookForm);
-    const name = (data.get("name") || "").toString().trim();
-    const email = (data.get("email") || "").toString().trim();
-    const phone = (data.get("phone") || "").toString().trim();
-    const message = (data.get("message") || "").toString().trim();
-    const payload = {};
+    const payload = { lang };
     data.forEach((value, key) => { payload[key] = value; });
+    payload.consent = bookForm.elements.consent.checked;
 
-    // Fallback in case the Netlify Forms endpoint is unreachable (e.g. local
-    // testing, or a network hiccup) — opens the visitor's email app instead.
-    function sendByMailto() {
-      const subject = t.mailSubject.replace("{name}", name);
-      const body = [
-        `${t.formName}: ${name}`,
-        `${t.formEmail}: ${email}`,
-        `${t.formPhone}: ${phone}`,
-        "",
-        `${t.formMessage}:`,
-        message,
-      ].join("\n");
-      window.location.href = `mailto:${RESERVATION_EMAILS.join(",")}` +
-        `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      setTimeout(() => { window.location.href = THANK_YOU_PAGE[lang]; }, 300);
+    formError.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = t.formSubmitting;
+
+    try {
+      const res = await fetch(BOOKING_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`Booking endpoint responded ${res.status}`);
+      window.location.href = THANK_YOU_PAGE[lang];
+    } catch (err) {
+      console.error(err);
+      formError.textContent = t.formError;
+      formError.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = t.formSubmit;
     }
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encodeFormData(payload),
-    })
-      .then((res) => {
-        if (res.ok) window.location.href = THANK_YOU_PAGE[lang];
-        else sendByMailto();
-      })
-      .catch(sendByMailto);
   });
 
   document.addEventListener("keydown", (e) => {
