@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KGXT8WTQ');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'Aventure du Sucre — The sweetest adventure in Mauritius</title>
@@ -355,14 +362,6 @@
   .consent-row span{font-size:13.5px;line-height:1.5;color:#5C4630;}
   .modal-submit{width:100%;padding:15px;font-size:16px;margin-top:6px;}
   .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
-  .success{text-align:center;padding:8px 0;}
-  .success-check{
-    width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
-    background:var(--green);color:#FFF9EF;font-size:32px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .success h2{font-weight:700;font-size:24px;margin:0 0 12px;color:var(--ink);}
-  .success p{font-size:15.5px;line-height:1.6;color:#5C4630;margin:0 0 24px;}
   body.modal-open{overflow:hidden;}
 
   @media (prefers-reduced-motion:reduce){
@@ -372,6 +371,10 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGXT8WTQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <header class="site-header">
     <nav class="nav">
@@ -624,13 +627,6 @@
           <p class="modal-fineprint" data-i18n="formFineprint"></p>
         </form>
       </div>
-
-      <div id="modal-success-view" class="success" hidden>
-        <div class="success-check" aria-hidden="true">&#10003;</div>
-        <h2 data-i18n="formSuccessTitle"></h2>
-        <p id="success-text"></p>
-        <button type="button" class="btn btn-primary" data-action="reset-modal" data-i18n="formAgain"></button>
-      </div>
     </div>
   </div>
 
@@ -704,9 +700,6 @@
       formSubmit: "Submit",
       formFineprint: "This opens your email app with your message ready to send to our team.",
       mailSubject: "New reservation request from {name}",
-      formSuccessTitle: "Almost there!",
-      formSuccessText: "Thank you, {name}. Your email app should now be open with your message ready to send — please hit send to reach our team.",
-      formAgain: "Send another message",
     },
     fr: {
       brandTag: "Musée du Sucre · Île Maurice",
@@ -776,9 +769,6 @@
       formSubmit: "Envoyer",
       formFineprint: "Ceci ouvre votre application e-mail avec votre message prêt à être envoyé à notre équipe.",
       mailSubject: "Nouvelle demande de réservation de {name}",
-      formSuccessTitle: "Presque terminé !",
-      formSuccessText: "Merci, {name}. Votre application e-mail devrait maintenant être ouverte avec votre message prêt à envoyer — il ne reste plus qu'à cliquer sur envoyer pour joindre notre équipe.",
-      formAgain: "Envoyer un autre message",
     },
   };
 
@@ -865,18 +855,15 @@
 
   /* ── Booking modal ─────────────────────────────────── */
   const RESERVATION_EMAILS = ["reservation@aventuredusucre.com", "administration@aventuredusucre.com"];
+  const THANK_YOU_PAGE = { en: "thank-you.html", fr: "merci.html" };
 
   const modal = document.getElementById("book-modal");
-  const formView = document.getElementById("modal-form-view");
-  const successView = document.getElementById("modal-success-view");
   const bookForm = document.getElementById("book-form");
   let lastFocused = null;
 
   function openModal() {
     closeMenu();
     lastFocused = document.activeElement;
-    successView.hidden = true;
-    formView.hidden = false;
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
@@ -888,13 +875,6 @@
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
     if (lastFocused && lastFocused.focus) lastFocused.focus();
-  }
-
-  function resetModal() {
-    bookForm.reset();
-    successView.hidden = true;
-    formView.hidden = false;
-    bookForm.elements.name.focus();
   }
 
   // Backdrop click (backdrop element === modal itself).
@@ -926,11 +906,9 @@
       `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
 
-    document.getElementById("success-text").textContent = t.formSuccessText.replace("{name}", name);
-
-    formView.hidden = true;
-    successView.hidden = false;
-    successView.querySelector("button").focus();
+    // mailto: doesn't navigate the tab away, so redirect to the thank-you page
+    // right after — the OS/email client handles the mailto independently.
+    setTimeout(() => { window.location.href = THANK_YOU_PAGE[lang]; }, 300);
   });
 
   document.addEventListener("keydown", (e) => {
@@ -948,7 +926,6 @@
     if (action === "close-menu") closeMenu();
     if (action === "book") { e.preventDefault(); openModal(); }
     if (action === "close-modal") closeModal();
-    if (action === "reset-modal") resetModal();
   });
 
   render();
