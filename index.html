@@ -599,7 +599,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 class="modal-title" id="book-modal-title" data-i18n="bookModalTitle"></h2>
         <p class="modal-sub" data-i18n="bookModalSubtitle"></p>
 
-        <form id="book-form" novalidate>
+        <form id="book-form" name="booking" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="booking">
+          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
           <label class="field">
             <span data-i18n="formName"></span>
             <input type="text" name="name" required autocomplete="name" placeholder=" ">
@@ -882,6 +884,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (e.target === modal) closeModal();
   });
 
+  function encodeFormData(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
   bookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const t = STRINGS[lang];
@@ -892,23 +900,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const email = (data.get("email") || "").toString().trim();
     const phone = (data.get("phone") || "").toString().trim();
     const message = (data.get("message") || "").toString().trim();
+    const payload = {};
+    data.forEach((value, key) => { payload[key] = value; });
 
-    const subject = t.mailSubject.replace("{name}", name);
-    const body = [
-      `${t.formName}: ${name}`,
-      `${t.formEmail}: ${email}`,
-      `${t.formPhone}: ${phone}`,
-      "",
-      `${t.formMessage}:`,
-      message,
-    ].join("\n");
-    const mailtoUrl = `mailto:${RESERVATION_EMAILS.join(",")}` +
-      `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoUrl;
+    // Fallback in case the Netlify Forms endpoint is unreachable (e.g. local
+    // testing, or a network hiccup) — opens the visitor's email app instead.
+    function sendByMailto() {
+      const subject = t.mailSubject.replace("{name}", name);
+      const body = [
+        `${t.formName}: ${name}`,
+        `${t.formEmail}: ${email}`,
+        `${t.formPhone}: ${phone}`,
+        "",
+        `${t.formMessage}:`,
+        message,
+      ].join("\n");
+      window.location.href = `mailto:${RESERVATION_EMAILS.join(",")}` +
+        `?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setTimeout(() => { window.location.href = THANK_YOU_PAGE[lang]; }, 300);
+    }
 
-    // mailto: doesn't navigate the tab away, so redirect to the thank-you page
-    // right after — the OS/email client handles the mailto independently.
-    setTimeout(() => { window.location.href = THANK_YOU_PAGE[lang]; }, 300);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encodeFormData(payload),
+    })
+      .then((res) => {
+        if (res.ok) window.location.href = THANK_YOU_PAGE[lang];
+        else sendByMailto();
+      })
+      .catch(sendByMailto);
   });
 
   document.addEventListener("keydown", (e) => {
