@@ -6,6 +6,18 @@
   # No build step: the site is plain HTML/CSS/JS.
   command = ""
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Booking form → Brevo. Must come before the catch-all below, otherwise the
+# SPA rewrite would answer the POST with index.html.
+[[redirects]]
+  from = "/api/booking"
+  to = "/.netlify/functions/booking"
+  status = 200
+  force = true
+
 # Single-page site: serve index.html for any path that isn't a real file.
 # Netlify checks for an existing file first, so real assets (/assets/*) are
 # served directly; only unknown paths fall through to the landing page.
