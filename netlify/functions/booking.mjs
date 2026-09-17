@@ -21,7 +21,6 @@ const BREVO_API = "https://api.brevo.com/v3";
 const DEFAULT_RECIPIENTS = [
   "reservation@aventuredusucre.com",
   "administration@aventuredusucre.com",
-  "support@sandbox.mu",
 ];
 
 const COPY = {
