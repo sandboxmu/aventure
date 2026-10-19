@@ -796,15 +796,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 
-  // Floating "Book tickets" widget: only show once the hero (which has its
-  // own booking buttons) has scrolled out of view.
+  // Floating "Book tickets" widget: hidden while the hero (which has its own
+  // booking buttons) is in view, and hidden again once the footer's rights
+  // line scrolls into view so it doesn't sit on top of the copyright text.
   const floatingBook = document.querySelector(".floating-book");
   const heroSection = document.querySelector(".hero");
-  if (floatingBook && heroSection && "IntersectionObserver" in window) {
-    new IntersectionObserver(
-      (entries) => { floatingBook.classList.toggle("visible", !entries[0].isIntersecting); },
-      { threshold: 0 }
-    ).observe(heroSection);
+  const footerRights = document.querySelector(".footer-rights");
+  if (floatingBook && heroSection && footerRights && "IntersectionObserver" in window) {
+    const state = { hero: true, footer: false };
+    const update = () => floatingBook.classList.toggle("visible", !state.hero && !state.footer);
+    new IntersectionObserver(([entry]) => { state.hero = entry.isIntersecting; update(); }, { threshold: 0 }).observe(heroSection);
+    new IntersectionObserver(([entry]) => { state.footer = entry.isIntersecting; update(); }, { threshold: 0 }).observe(footerRights);
   } else if (floatingBook) {
     floatingBook.classList.add("visible");
   }
