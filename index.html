@@ -336,55 +336,10 @@ src="https://www.facebook.com/tr?id=1274581858132128&ev=PageView&noscript=1"
     .brand-logo-img{height:28px;}
     .hero-inner{padding:94px 20px 46px;}
     .hero h1{font-size:clamp(34px,10vw,50px);}
-    .modal{padding:28px 22px 24px;}
     .btn-hero,.btn-ghost{width:100%;}
   }
 
-  /* ── Booking modal ──────────────────────────────────── */
-  .modal-backdrop{
-    position:fixed;inset:0;z-index:100;
-    display:flex;align-items:center;justify-content:center;padding:24px;
-    background:rgba(20,10,4,0.55);backdrop-filter:blur(6px);
-    opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;
-  }
-  .modal-backdrop.open{opacity:1;visibility:visible;}
-  .modal{
-    position:relative;width:100%;max-width:480px;max-height:calc(100vh - 48px);overflow-y:auto;
-    background:var(--cream);border-radius:24px;padding:34px 32px 32px;
-    box-shadow:0 30px 80px rgba(20,10,4,0.5);
-    transform:translateY(16px) scale(.98);transition:transform .22s ease;
-  }
-  .modal-backdrop.open .modal{transform:none;}
-  .modal-close{
-    position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
-    border:none;cursor:pointer;background:rgba(43,26,16,0.08);color:#4A3320;
-    font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;
-    transition:background .15s ease;
-  }
-  .modal-close:hover{background:rgba(43,26,16,0.16);}
-  .modal-title{font-weight:700;font-size:26px;line-height:1.1;margin:0;letter-spacing:-0.01em;color:var(--ink);}
-  .modal-sub{font-size:14.5px;line-height:1.5;color:#6B543C;margin:10px 0 22px;}
-  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-  .field > span{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:#4A3320;}
-  .field input,.field textarea{
-    font-family:var(--body);font-size:15px;color:var(--ink);
-    padding:11px 14px;border:1px solid #D8C29B;border-radius:12px;background:var(--cream-card);
-    transition:border-color .15s ease,box-shadow .15s ease;resize:vertical;
-  }
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,89,28,0.14);}
-  .field input:invalid:not(:placeholder-shown),.field textarea:invalid:not(:placeholder-shown){border-color:#B4432B;}
-  .consent-label{font-family:var(--display);font-weight:700;font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;color:#4A3320;margin:0 0 8px;}
-  .consent-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer;}
-  .consent-row input{margin-top:3px;width:16px;height:16px;flex:none;accent-color:var(--accent);cursor:pointer;}
-  .consent-row span{font-size:13.5px;line-height:1.5;color:#5C4630;}
-  .modal-submit{width:100%;padding:15px;font-size:16px;margin-top:6px;}
-  .modal-submit[disabled]{opacity:.6;cursor:progress;}
-  .form-error{font-size:13px;color:#B3261E;text-align:center;margin:12px 0 0;line-height:1.45;}
-  .modal-fineprint{font-size:12px;color:#9A7C5C;text-align:center;margin:14px 0 0;line-height:1.4;}
-  body.modal-open{overflow:hidden;}
-
   @media (prefers-reduced-motion:reduce){
-    .modal-backdrop,.modal{transition:none;}
     *{animation:none !important;}
   }
 </style>
@@ -410,7 +365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="btn btn-lang" data-action="toggle-lang" aria-label="Switch language">
         <span aria-hidden="true">◍</span><span data-i18n="langToggle"></span>
       </button>
-      <button class="btn btn-primary" data-action="book" data-i18n="navBook"></button>
+      <a class="btn btn-primary" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="navBook"></a>
       <button class="nav-toggle" data-action="toggle-menu" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
       </button>
@@ -438,7 +393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1 data-i18n="heroTitle"></h1>
         <p class="hero-lead" data-i18n="heroText"></p>
         <div class="hero-actions">
-          <button class="btn btn-hero" data-action="book" data-i18n="heroBook"></button>
+          <a class="btn btn-hero" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="heroBook"></a>
           <a href="#experience" class="btn-ghost"><span data-i18n="heroPlan"></span> <span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-chips">
@@ -469,7 +424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="cards-head"><span class="eyebrow" data-i18n="cardsEyebrow"></span></div>
       <div class="cards" id="cards-grid"></div>
       <div class="cards-cta">
-        <button class="btn btn-book-lg" data-action="book" data-i18n="cardsBook"></button>
+        <a class="btn btn-book-lg" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="cardsBook"></a>
       </div>
     </div>
   </section>
@@ -515,7 +470,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="cards-cta">
-        <button class="btn btn-book-lg" data-action="book" data-i18n="venuesBook"></button>
+        <a class="btn btn-book-lg" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="venuesBook"></a>
       </div>
     </div>
   </section>
@@ -555,7 +510,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="visit-cta">
-        <button class="btn btn-book-lg" data-action="book" data-i18n="visitBook"></button>
+        <a class="btn btn-book-lg" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="visitBook"></a>
       </div>
     </div>
   </section>
@@ -583,7 +538,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="cta-inner">
       <h2 data-i18n="ctaTitle"></h2>
       <p data-i18n="ctaText"></p>
-      <button class="btn btn-cta" data-action="book" data-i18n="ctaBook"></button>
+      <a class="btn btn-cta" href="https://ticket.aventuredusucre.com/" target="_blank" rel="noopener noreferrer" data-i18n="ctaBook"></a>
     </div>
   </section>
 
@@ -609,47 +564,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="footer-rights" data-i18n="footerRights"></div>
   </footer>
-
-  <div class="modal-backdrop" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-modal-title" aria-hidden="true">
-    <div class="modal">
-      <button class="modal-close" type="button" data-action="close-modal" aria-label="Close">&times;</button>
-
-      <div id="modal-form-view">
-        <h2 class="modal-title" id="book-modal-title" data-i18n="bookModalTitle"></h2>
-        <p class="modal-sub" data-i18n="bookModalSubtitle"></p>
-
-        <form id="book-form" name="booking" method="POST" action="/api/booking" novalidate>
-          <p hidden><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-          <label class="field">
-            <span data-i18n="formName"></span>
-            <input type="text" name="name" required autocomplete="name" placeholder=" ">
-          </label>
-          <label class="field">
-            <span data-i18n="formEmail"></span>
-            <input type="email" name="email" required autocomplete="email" placeholder=" ">
-          </label>
-          <label class="field">
-            <span data-i18n="formPhone"></span>
-            <input type="tel" name="phone" required autocomplete="tel" placeholder=" ">
-          </label>
-          <label class="field">
-            <span data-i18n="formMessage"></span>
-            <textarea name="message" rows="4" required placeholder=" "></textarea>
-          </label>
-
-          <p class="consent-label" data-i18n="formConsentLabel"></p>
-          <label class="consent-row">
-            <input type="checkbox" name="consent" required>
-            <span data-i18n="formConsentText"></span>
-          </label>
-
-          <button type="submit" class="btn btn-primary modal-submit" data-i18n="formSubmit"></button>
-          <p class="form-error" id="book-form-error" role="alert" hidden></p>
-          <p class="modal-fineprint" data-i18n="formFineprint"></p>
-        </form>
-      </div>
-    </div>
-  </div>
 
 <script>
   const STRINGS = {
@@ -713,15 +627,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       footerRights: "© 2026 L'Aventure du Sucre. All rights reserved.",
       pageTitle: "L'Aventure du Sucre — The sweetest adventure in Mauritius",
       metaDesc: "Step inside a 260-year-old sugar factory in Beau Plan, Mauritius. Taste rare rums, discover extraordinary sugars, and book your family day out.",
-      bookModalTitle: "Book your visit",
-      bookModalSubtitle: "Send us your details and our team will get back to you to confirm your visit.",
-      formName: "Full Name", formEmail: "Email", formPhone: "Phone", formMessage: "Message",
-      formConsentLabel: "Privacy Policy / Cookies:",
-      formConsentText: "I agree to the collection and use of my personal data as part of my ticket request.",
-      formSubmit: "Submit",
-      formSubmitting: "Sending…",
-      formFineprint: "We'll email you back to confirm your visit. Your details are never shared with anyone else.",
-      formError: "We couldn't send your request. Please try again, or email us at reservation@aventuredusucre.com.",
     },
     fr: {
       brandTag: "Musée du Sucre · Île Maurice",
@@ -783,15 +688,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       footerRights: "© 2026 L'Aventure du Sucre. Tous droits réservés.",
       pageTitle: "L'Aventure du Sucre — La plus douce aventure de l'île Maurice",
       metaDesc: "Entrez dans une sucrerie vieille de 260 ans à Beau Plan, Maurice. Dégustez des rhums rares, découvrez des sucres extraordinaires et réservez votre sortie en famille.",
-      bookModalTitle: "Réservez votre visite",
-      bookModalSubtitle: "Envoyez-nous vos coordonnées, notre équipe vous recontactera pour confirmer votre visite.",
-      formName: "Nom complet", formEmail: "E-mail", formPhone: "Téléphone", formMessage: "Message",
-      formConsentLabel: "Politique de confidentialité / cookies :",
-      formConsentText: "J'accepte la collecte et l'utilisation de mes données personnelles dans le cadre de ma demande de billetterie.",
-      formSubmit: "Envoyer",
-      formSubmitting: "Envoi en cours…",
-      formFineprint: "Nous vous répondrons par e-mail pour confirmer votre visite. Vos données ne sont jamais transmises à des tiers.",
-      formError: "Votre demande n'a pas pu être envoyée. Merci de réessayer ou de nous écrire à reservation@aventuredusucre.com.",
     },
   };
 
@@ -876,78 +772,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   window.addEventListener("resize", () => { if (window.innerWidth > 860) closeMenu(); });
 
-  /* ── Booking modal ─────────────────────────────────── */
-  const THANK_YOU_PAGE = { en: "thank-you.html", fr: "merci.html" };
-
-  const modal = document.getElementById("book-modal");
-  const bookForm = document.getElementById("book-form");
-  let lastFocused = null;
-
-  function openModal() {
-    closeMenu();
-    lastFocused = document.activeElement;
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
-    setTimeout(() => bookForm.elements.name.focus(), 60);
-  }
-
-  function closeModal() {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-    if (lastFocused && lastFocused.focus) lastFocused.focus();
-  }
-
-  // Backdrop click (backdrop element === modal itself).
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Serverless function that talks to Brevo; the API key stays on the server.
-  const BOOKING_ENDPOINT = "/api/booking";
-
-  const formError = document.getElementById("book-form-error");
-  const submitBtn = bookForm.querySelector(".modal-submit");
-
-  bookForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const t = STRINGS[lang];
-    if (!bookForm.checkValidity()) { bookForm.reportValidity(); return; }
-
-    const data = new FormData(bookForm);
-    const payload = { lang };
-    data.forEach((value, key) => { payload[key] = value; });
-    payload.consent = bookForm.elements.consent.checked;
-
-    formError.hidden = true;
-    submitBtn.disabled = true;
-    submitBtn.textContent = t.formSubmitting;
-
-    try {
-      const res = await fetch(BOOKING_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`Booking endpoint responded ${res.status}`);
-      if (typeof fbq === "function") {
-        fbq("track", "Lead");
-      }
-      window.location.href = THANK_YOU_PAGE[lang];
-    } catch (err) {
-      console.error(err);
-      formError.textContent = t.formError;
-      formError.hidden = false;
-      submitBtn.disabled = false;
-      submitBtn.textContent = t.formSubmit;
-    }
+  /* ── Ticket links (external) ───────────────────────── */
+  document.querySelectorAll('a[href="https://ticket.aventuredusucre.com/"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      if (typeof fbq === "function") fbq("track", "Lead");
+    });
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    if (modal.classList.contains("open")) closeModal();
-    else if (header.classList.contains("menu-open")) closeMenu();
+    if (e.key === "Escape" && header.classList.contains("menu-open")) closeMenu();
   });
 
   document.addEventListener("click", (e) => {
@@ -957,8 +790,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (action === "toggle-lang") toggleLang();
     if (action === "toggle-menu") toggleMenu();
     if (action === "close-menu") closeMenu();
-    if (action === "book") { e.preventDefault(); openModal(); }
-    if (action === "close-modal") closeModal();
   });
 
   render();
